@@ -4,13 +4,11 @@
 
 <div align="center">
 
-# 🧬 write-human-r-code
-
-**R code that looks written, not generated.**
-
 [![R](https://img.shields.io/badge/R-Scientific%20Computing-276DC3?style=flat-square&logo=r)](#)
-[![AI Skill](https://img.shields.io/badge/AI-Agent%20Skill-6C63FF?style=flat-square)](#)
-[![Reproducible](https://img.shields.io/badge/research-reproducible-success?style=flat-square)](#)
+[![AI Agent Skill](https://img.shields.io/badge/AI-Agent%20Skill-6C63FF?style=flat-square)](#)
+[![Reproducible](https://img.shields.io/badge/research-reproducible-2EA44F?style=flat-square)](#)
+[![Scientific Code](https://img.shields.io/badge/scientific-code-0A66C2?style=flat-square)](#)
+[![Status](https://img.shields.io/badge/status-active-2EA44F?style=flat-square)](#)
 
 **English** · [简体中文](./README.zh-CN.md)
 
@@ -18,44 +16,42 @@
 
 ---
 
-## 🤖 AI can write R code. Can a human maintain it six months later?
+## 📌 Overview
 
-Typical AI-generated scripts often follow this path:
+AI can generate R code quickly. The harder question is whether another researcher — or future you — can still understand and safely modify it months later.
 
-```text
-works once
-↓
-too many temporary objects
-↓
-hidden transformations
-↓
-unnecessary abstractions
-↓
-difficult to modify
-↓
-nobody wants to touch it
-```
+`write-human-r-code` helps AI write R scripts that are:
 
-`write-human-r-code` focuses on a different goal:
+> **readable · reproducible · scientifically faithful · maintainable**
 
-> **Write R code like a researcher who expects to read, audit and modify it again.**
+The goal is not to make scientific scripts look like software frameworks. The goal is to make them **clear enough to audit and simple enough to maintain**.
 
-## 🌱 From generated code to research code
+## 🤖 From generated code to research code
 
 ```mermaid
 flowchart LR
-    A["🤖 AI-generated code"] --> B["Readable structure"]
-    B --> C["Explicit data flow"]
-    C --> D["Transparent statistics"]
-    D --> E["Reproducible output"]
-    E --> F["🧑‍🔬 Human-maintainable R"]
+    A["🤖 AI generated"] --> B["📄 Readable structure"]
+    B --> C["🧬 Explicit data flow"]
+    C --> D["📊 Transparent statistics"]
+    D --> E["✅ Reproducible output"]
+    E --> F["🧑‍🔬 Human maintainable"]
 ```
+
+## ✅ Core principles
+
+| Principle | What it means |
+|---|---|
+| 👤 **Human-readable first** | Clear names, comments and script structure |
+| 🔬 **Scientific reproducibility** | Explicit workflow from input to formal output |
+| 🧠 **Preserve scientific meaning** | Never silently change methods, samples or formal values |
+| 🧩 **Right-sized engineering** | Use abstraction only when it reduces real analytical complexity |
+| 🔍 **Traceable decisions** | Filtering, transformations and statistics remain visible |
 
 ## ✨ What “human” means here
 
-It does **not** mean deliberately writing bad code. It means avoiding unnecessary software-engineering complexity when a scientific script only needs to be clear and reproducible.
+It does **not** mean deliberately writing simplistic or low-quality code.
 
-### Prefer
+It means preferring this:
 
 ```r
 metadata <- read.csv("data/metadata.csv")
@@ -65,7 +61,7 @@ stats <- run_permanova(pcoa_data)
 plot_pcoa(pcoa_data)
 ```
 
-### Over
+over this:
 
 ```r
 cfg <- PipelineConfig$new(...)
@@ -75,50 +71,50 @@ executor <- ctx$get_executor()
 executor$run()
 ```
 
-when the extra abstraction adds no scientific value.
+when the abstraction adds no scientific value.
 
-## 🧠 Scientific code has a story
+## 🧠 Scientific code should tell a story
 
 ```mermaid
-flowchart TD
-    A["📥 Raw / upstream data"] --> B["🧹 Data preparation"]
-    B --> C["📊 Statistical analysis"]
-    C --> D["🎨 Visualization"]
-    D --> E["📤 Results / figures"]
+flowchart LR
+    A["📥 Source data"] --> B["🧹 Preparation"]
+    B --> C["📊 Statistics"]
+    C --> D["🎨 Plot"]
+    D --> E["📤 Results"]
 ```
 
-A reader should be able to answer:
+A reader should quickly be able to answer:
 
 - Where did this object come from?
 - Which samples were included?
-- Which statistical method was used?
 - Where did filtering happen?
-- Which step generated this figure?
+- Which statistical method was used?
+- Which step generated the figure or table?
 
-## 🚫 What this Skill tries to avoid
+## 🚫 What this Skill tries to prevent
 
 ### Over-engineering
 
 ```text
-scientific panel
+one scientific panel
 → framework
-→ abstraction layer
 → factory
 → registry
-→ configuration system
+→ configuration layer
+→ nested abstractions
 ```
 
-when a clear R script would be easier to audit and maintain.
+when a clear script would be easier to audit.
 
 ### Hidden scientific decisions
 
-Bad:
+Avoid unexplained operations such as:
 
 ```r
 df <- df[df$value < 10, ]
 ```
 
-Better:
+Prefer explicit scientific intent:
 
 ```r
 # Exclude measurements above the predefined instrument detection range.
@@ -127,7 +123,7 @@ df <- df[df$value < detection_limit, ]
 
 ### Silent methodological changes
 
-AI should not casually change:
+AI should not silently alter:
 
 - sample inclusion;
 - statistical methods;
@@ -136,7 +132,9 @@ AI should not casually change:
 - formal reported values;
 - the scientific meaning of a figure.
 
-## 🔬 A scientific R script should feel like this
+## 🧪 Recommended script shape
+
+For a simple panel:
 
 ```text
 01_plot_pcoa.R
@@ -152,29 +150,28 @@ plot()
 save_results()
 ```
 
-For computationally expensive workflows, preparation and plotting can be separated intentionally. The point is not to force every panel into a software framework.
+For genuinely expensive workflows, preparation can be separated intentionally:
 
-## 🧩 Suitable for
+```text
+prepare_network.R
+       ↓
+network object
+       ↓
+plot_network.R
+```
 
-- ecology
-- microbial ecology and microbiome research
-- soil and environmental science
-- transcriptomics
-- metabolomics
-- multi-omics
-- publication figures
-- exploratory scientific analysis
+## 🎯 Suitable for
+
+| Research context | Typical use |
+|---|---|
+| 🌱 Ecology & soil science | community, environmental and treatment analyses |
+| 🦠 Microbiome research | amplicon, network and diversity workflows |
+| 🧬 Transcriptomics / metabolomics | reproducible downstream analysis |
+| 🔗 Multi-omics | transparent cross-layer analysis |
+| 📈 Publication figures | maintainable panel-specific scripts |
 
 ## 🌿 Philosophy
 
-Good scientific code is not merely code that runs. It should also be:
+> **Good scientific code should run, explain itself, preserve scientific meaning, and remain editable.**
 
-```text
-Readable
-Traceable
-Scientifically faithful
-Reproducible
-Easy to modify
-```
-
-> **Write code for the next researcher — even when that researcher is future you.**
+> Write code for the next researcher — even when that researcher is future you.
