@@ -26,6 +26,50 @@ AI 很容易快速生成 R 代码，但真正困难的是：几个月以后，�
 
 它不是让科研脚本看起来“更高级”，而是让代码**足够清晰，可以复查；足够简单，可以长期维护**。
 
+## 📦 安装
+
+### 推荐：使用 CC Switch 统一管理 Skill
+
+如果同时使用 Claude Code、Codex、DeepSeek Harness 等多个 Agent，推荐由 **CC Switch 统一管理 Skill**，避免在不同 Agent 目录中维护多份实体副本。
+
+使用 CC Switch 官方 Deep Link 导入本 Skill：
+
+**Windows PowerShell**
+
+```powershell
+Start-Process "ccswitch://v1/import?resource=skill&name=write-human-r-code&repo=apexpeng/write-human-r-code&branch=main"
+```
+
+**macOS**
+
+```bash
+open "ccswitch://v1/import?resource=skill&name=write-human-r-code&repo=apexpeng/write-human-r-code&branch=main"
+```
+
+也可以直接打开：
+
+```text
+ccswitch://v1/import?resource=skill&name=write-human-r-code&repo=apexpeng/write-human-r-code&branch=main
+```
+
+导入后，在 **CC Switch → Skills** 中选择需要使用该 Skill 的 Agent 并完成安装/同步。多 Agent 环境推荐采用 **CC Switch 内置存储 + SymbolicLink（软链接）同步**。
+
+### 三个 Skill 的推荐安装顺序
+
+```text
+1. skill-install-workflow
+        ↓
+2. r-data-lineage-plotting
+        ↓
+3. write-human-r-code        ← 当前 Skill
+```
+
+推荐理由：
+
+1. **先安装 `skill-install-workflow`**：让后续 Skill 的安装先经过来源、重复、版本、风险和完整性治理。
+2. **再安装 `r-data-lineage-plotting`**：先建立权威数据源、目录职责和分析依赖关系。
+3. **最后安装 `write-human-r-code`**：在上述基础上约束 R 脚本的可读性、科研透明性和重构方式。本 Skill 在任务涉及数据文件或分析对象时，会明确与 `r-data-lineage-plotting` 配合使用。
+
 ## 🤖 从“AI 生成”到“科研代码”
 
 ```mermaid
