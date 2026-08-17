@@ -1,67 +1,180 @@
-# write-human-r-code
+<p align="center">
+  <img src="assets/banner.svg" width="100%" alt="write-human-r-code banner">
+</p>
 
-An AI coding guideline for writing maintainable, reproducible, human-readable R code.
+<div align="center">
 
-## Overview
+# 🧬 write-human-r-code
 
-AI can generate R code quickly, but generated scripts often suffer from unclear structure, duplicated logic, poor naming, and hidden assumptions.
+**R code that looks written, not generated.**
 
-`write-human-r-code` helps AI generate R scripts that follow real scientific programming practices.
+[![R](https://img.shields.io/badge/R-Scientific%20Computing-276DC3?style=flat-square&logo=r)](#)
+[![AI Skill](https://img.shields.io/badge/AI-Agent%20Skill-6C63FF?style=flat-square)](#)
+[![Reproducible](https://img.shields.io/badge/research-reproducible-success?style=flat-square)](#)
 
-## Core Goal
+**English** · [简体中文](./README.zh-CN.md)
 
-> Write R code that another researcher can understand, modify, and reuse.
+</div>
 
-## Principles
+---
 
-### Human-readable first
+## 🤖 AI can write R code. Can a human maintain it six months later?
 
-Prefer:
-
-- clear object names;
-- meaningful comments;
-- explicit workflows.
-
-Avoid:
-
-- unnecessary abstraction;
-- unreadable one-line tricks;
-- excessive engineering patterns.
-
-### Scientific reproducibility
-
-Generated code should clearly separate:
+Typical AI-generated scripts often follow this path:
 
 ```text
-Input data
-    ↓
-Data preparation
-    ↓
-Statistical analysis
-    ↓
-Visualization
-    ↓
-Output
+works once
+↓
+too many temporary objects
+↓
+hidden transformations
+↓
+unnecessary abstractions
+↓
+difficult to modify
+↓
+nobody wants to touch it
 ```
 
-### Preserve scientific meaning
+`write-human-r-code` focuses on a different goal:
 
-AI should not silently change:
+> **Write R code like a researcher who expects to read, audit and modify it again.**
 
+## 🌱 From generated code to research code
+
+```mermaid
+flowchart LR
+    A["🤖 AI-generated code"] --> B["Readable structure"]
+    B --> C["Explicit data flow"]
+    C --> D["Transparent statistics"]
+    D --> E["Reproducible output"]
+    E --> F["🧑‍🔬 Human-maintainable R"]
+```
+
+## ✨ What “human” means here
+
+It does **not** mean deliberately writing bad code. It means avoiding unnecessary software-engineering complexity when a scientific script only needs to be clear and reproducible.
+
+### Prefer
+
+```r
+metadata <- read.csv("data/metadata.csv")
+
+pcoa_data <- prepare_pcoa_data(metadata, otu_table)
+stats <- run_permanova(pcoa_data)
+plot_pcoa(pcoa_data)
+```
+
+### Over
+
+```r
+cfg <- PipelineConfig$new(...)
+factory <- AnalysisFactory$new(cfg)
+ctx <- factory$build_context()
+executor <- ctx$get_executor()
+executor$run()
+```
+
+when the extra abstraction adds no scientific value.
+
+## 🧠 Scientific code has a story
+
+```mermaid
+flowchart TD
+    A["📥 Raw / upstream data"] --> B["🧹 Data preparation"]
+    B --> C["📊 Statistical analysis"]
+    C --> D["🎨 Visualization"]
+    D --> E["📤 Results / figures"]
+```
+
+A reader should be able to answer:
+
+- Where did this object come from?
+- Which samples were included?
+- Which statistical method was used?
+- Where did filtering happen?
+- Which step generated this figure?
+
+## 🚫 What this Skill tries to avoid
+
+### Over-engineering
+
+```text
+scientific panel
+→ framework
+→ abstraction layer
+→ factory
+→ registry
+→ configuration system
+```
+
+when a clear R script would be easier to audit and maintain.
+
+### Hidden scientific decisions
+
+Bad:
+
+```r
+df <- df[df$value < 10, ]
+```
+
+Better:
+
+```r
+# Exclude measurements above the predefined instrument detection range.
+df <- df[df$value < detection_limit, ]
+```
+
+### Silent methodological changes
+
+AI should not casually change:
+
+- sample inclusion;
 - statistical methods;
-- sample definitions;
-- biological interpretation.
+- transformation methods;
+- filtering thresholds;
+- formal reported values;
+- the scientific meaning of a figure.
 
-## Suitable For
+## 🔬 A scientific R script should feel like this
 
-- ecology;
-- microbiome research;
-- transcriptomics;
-- metabolomics;
-- environmental science.
+```text
+01_plot_pcoa.R
 
-## Philosophy
+read_data()
+    ↓
+prepare_data()
+    ↓
+run_statistics()
+    ↓
+plot()
+    ↓
+save_results()
+```
 
-Good scientific code is not only executable.
+For computationally expensive workflows, preparation and plotting can be separated intentionally. The point is not to force every panel into a software framework.
 
-It is explainable, reproducible, and maintainable.
+## 🧩 Suitable for
+
+- ecology
+- microbial ecology and microbiome research
+- soil and environmental science
+- transcriptomics
+- metabolomics
+- multi-omics
+- publication figures
+- exploratory scientific analysis
+
+## 🌿 Philosophy
+
+Good scientific code is not merely code that runs. It should also be:
+
+```text
+Readable
+Traceable
+Scientifically faithful
+Reproducible
+Easy to modify
+```
+
+> **Write code for the next researcher — even when that researcher is future you.**
