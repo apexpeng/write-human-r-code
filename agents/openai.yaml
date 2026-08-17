@@ -1,0 +1,4 @@
+interface:
+  display_name: "Human-Style R Code"
+  short_description: "Write module-contained, scientifically transparent, traceable, independently reproducible R code"
+  default_prompt: "Use $write-human-r-code to write, refactor, or review this R analysis with a coherent module boundary, analysis-specific preparation, scientific transparency, traceable data, and independent reproducibility."
