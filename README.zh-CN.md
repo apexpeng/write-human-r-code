@@ -26,6 +26,55 @@ AI 很容易快速生成 R 代码，但真正困难的是：几个月以后，�
 
 它不是让科研脚本看起来“更高级”，而是让代码**足够清晰，可以复查；足够简单，可以长期维护**。
 
+## 🤖 从“AI 生成”到“科研代码”
+
+```mermaid
+flowchart LR
+    A["🤖 AI 生成"] --> B["📄 结构清晰"]
+    B --> C["🧬 数据流透明"]
+    C --> D["📊 统计逻辑明确"]
+    D --> E["✅ 结果可复现"]
+    E --> F["🧑‍🔬 人类可维护"]
+```
+
+## ✅ 核心原则
+
+| 原则 | 含义 |
+|---|---|
+| 👤 **人类可读优先** | 清晰命名、必要注释、明确脚本结构 |
+| 🔬 **科研可复现** | 从输入数据到正式输出的流程清楚可重跑 |
+| 🧠 **保持科学语义** | 不擅自修改方法、样本或正式数值 |
+| 🧩 **适度工程化** | 只有真正降低分析复杂度时才引入抽象 |
+| 🔍 **科学决策可追踪** | 筛选、转换和统计判断保持可见 |
+
+## ✨ 什么叫“有人味儿”？
+
+不是故意写简单或低质量代码。
+
+而是在没有实际科研价值时，不把一个科研 panel 强行软件工程化。
+
+### 更倾向于
+
+```r
+metadata <- read.csv("data/metadata.csv")
+
+pcoa_data <- prepare_pcoa_data(metadata, otu_table)
+stats <- run_permanova(pcoa_data)
+plot_pcoa(pcoa_data)
+```
+
+而不是：
+
+```r
+cfg <- PipelineConfig$new(...)
+factory <- AnalysisFactory$new(cfg)
+ctx <- factory$build_context()
+executor <- ctx$get_executor()
+executor$run()
+```
+
+如果后者并没有带来真正的科学或维护价值。
+
 ## 📦 安装
 
 本仓库是一个独立 AI Agent Skill，**不要求使用 CC Switch**。
@@ -100,55 +149,6 @@ https://github.com/apexpeng/write-human-r-code.git
 ### 可选：CC Switch
 
 如果你本身已经使用 CC Switch 管理多个 Agent 的 Skill，可以通过 CC Switch 导入本仓库，避免维护多份实体副本。CC Switch 的推荐架构、SymbolicLink 管理方式和三个 Skill 的推荐安装顺序，请参见 [`skill-install-workflow`](https://github.com/apexpeng/skill-install-workflow) 的 README。
-
-## 🤖 从“AI 生成”到“科研代码”
-
-```mermaid
-flowchart LR
-    A["🤖 AI 生成"] --> B["📄 结构清晰"]
-    B --> C["🧬 数据流透明"]
-    C --> D["📊 统计逻辑明确"]
-    D --> E["✅ 结果可复现"]
-    E --> F["🧑‍🔬 人类可维护"]
-```
-
-## ✅ 核心原则
-
-| 原则 | 含义 |
-|---|---|
-| 👤 **人类可读优先** | 清晰命名、必要注释、明确脚本结构 |
-| 🔬 **科研可复现** | 从输入数据到正式输出的流程清楚可重跑 |
-| 🧠 **保持科学语义** | 不擅自修改方法、样本或正式数值 |
-| 🧩 **适度工程化** | 只有真正降低分析复杂度时才引入抽象 |
-| 🔍 **科学决策可追踪** | 筛选、转换和统计判断保持可见 |
-
-## ✨ 什么叫“有人味儿”？
-
-不是故意写简单或低质量代码。
-
-而是在没有实际科研价值时，不把一个科研 panel 强行软件工程化。
-
-### 更倾向于
-
-```r
-metadata <- read.csv("data/metadata.csv")
-
-pcoa_data <- prepare_pcoa_data(metadata, otu_table)
-stats <- run_permanova(pcoa_data)
-plot_pcoa(pcoa_data)
-```
-
-而不是：
-
-```r
-cfg <- PipelineConfig$new(...)
-factory <- AnalysisFactory$new(cfg)
-ctx <- factory$build_context()
-executor <- ctx$get_executor()
-executor$run()
-```
-
-如果后者并没有带来真正的科学或维护价值。
 
 ## 🧠 科研代码本身应该能够讲故事
 
