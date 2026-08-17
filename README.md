@@ -26,6 +26,48 @@ AI can generate R code quickly. The harder question is whether another researche
 
 The goal is not to make scientific scripts look like software frameworks. The goal is to make them **clear enough to audit and simple enough to maintain**.
 
+## 📦 Installation
+
+### Recommended: manage Skills with CC Switch
+
+For a multi-agent environment, use **CC Switch as the unified Skill manager** instead of maintaining separate physical copies for Claude Code, Codex, or other agents.
+
+Import this Skill into CC Switch:
+
+**Windows PowerShell**
+
+```powershell
+Start-Process "ccswitch://v1/import?resource=skill&name=write-human-r-code&repo=apexpeng/write-human-r-code&branch=main"
+```
+
+**macOS**
+
+```bash
+open "ccswitch://v1/import?resource=skill&name=write-human-r-code&repo=apexpeng/write-human-r-code&branch=main"
+```
+
+Direct URI:
+
+```text
+ccswitch://v1/import?resource=skill&name=write-human-r-code&repo=apexpeng/write-human-r-code&branch=main
+```
+
+After import, open **CC Switch → Skills** and install/sync the Skill to the agents you want to use. **CC Switch built-in storage + SymbolicLink sync** is recommended for a shared local Skill library.
+
+### Recommended installation order for this Skill suite
+
+```text
+1. skill-install-workflow
+        ↓
+2. r-data-lineage-plotting
+        ↓
+3. write-human-r-code        ← this Skill
+```
+
+1. Install **`skill-install-workflow` first** so later Skill installations are checked for provenance, duplication, version conflicts and integrity.
+2. Install **`r-data-lineage-plotting` second** to establish authoritative data sources, directory roles and rerun dependencies.
+3. Install **`write-human-r-code` third** to add human-readable R coding and refactoring guidance on top of that lineage foundation. This Skill explicitly pairs with `r-data-lineage-plotting` whenever work touches data files or analysis objects.
+
 ## 🤖 From generated code to research code
 
 ```mermaid
