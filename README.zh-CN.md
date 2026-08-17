@@ -1,16 +1,14 @@
 <p align="center">
-  <img src="assets/banner.svg" width="100%" alt="write-human-r-code banner">
+  <img src="assets/banner.zh-CN.svg" width="100%" alt="write-human-r-code 中文横幅">
 </p>
 
 <div align="center">
 
-# 🧬 write-human-r-code
-
-**让 AI 写出的 R code，看起来真的像“人写的”。**
-
 [![R](https://img.shields.io/badge/R-Scientific%20Computing-276DC3?style=flat-square&logo=r)](#)
-[![AI Skill](https://img.shields.io/badge/AI-Agent%20Skill-6C63FF?style=flat-square)](#)
-[![Reproducible](https://img.shields.io/badge/research-reproducible-success?style=flat-square)](#)
+[![AI Agent Skill](https://img.shields.io/badge/AI-Agent%20Skill-6C63FF?style=flat-square)](#)
+[![Reproducible](https://img.shields.io/badge/research-reproducible-2EA44F?style=flat-square)](#)
+[![Scientific Code](https://img.shields.io/badge/scientific-code-0A66C2?style=flat-square)](#)
+[![Status](https://img.shields.io/badge/status-active-2EA44F?style=flat-square)](#)
 
 [English](./README.md) · **简体中文**
 
@@ -18,44 +16,42 @@
 
 ---
 
-## 🤖 AI 会写 R code，但半年以后，人还能不能看懂并继续改？
+## 📌 概述
 
-很多 AI 生成代码往往经历：
+AI 很容易快速生成 R 代码，但真正困难的是：几个月以后，另一个科研人员——或者未来的自己——还能不能看懂、验证并安全修改它。
 
-```text
-第一次能跑
-↓
-对象越来越多
-↓
-数据变化隐藏在 pipeline 里
-↓
-抽象越来越复杂
-↓
-修改一个图需要追很多文件
-↓
-最后没人敢动
-```
+`write-human-r-code` 希望 AI 写出的 R 脚本具备：
 
-`write-human-r-code` 的目标不是让代码看起来“更高级”，而是：
+> **可读 · 可复现 · 科学忠实 · 长期可维护**
 
-> **让 AI 像一个需要长期维护自己科研项目的人一样写 R。**
+它不是让科研脚本看起来“更高级”，而是让代码**足够清晰，可以复查；足够简单，可以长期维护**。
 
-## 🌱 从“生成代码”到“科研代码”
+## 🤖 从“AI 生成”到“科研代码”
 
 ```mermaid
 flowchart LR
-    A["🤖 AI 生成"] --> B["结构清晰"]
-    B --> C["数据流透明"]
-    C --> D["统计逻辑明确"]
-    D --> E["结果可复现"]
+    A["🤖 AI 生成"] --> B["📄 结构清晰"]
+    B --> C["🧬 数据流透明"]
+    C --> D["📊 统计逻辑明确"]
+    D --> E["✅ 结果可复现"]
     E --> F["🧑‍🔬 人类可维护"]
 ```
 
+## ✅ 核心原则
+
+| 原则 | 含义 |
+|---|---|
+| 👤 **人类可读优先** | 清晰命名、必要注释、明确脚本结构 |
+| 🔬 **科研可复现** | 从输入数据到正式输出的流程清楚可重跑 |
+| 🧠 **保持科学语义** | 不擅自修改方法、样本或正式数值 |
+| 🧩 **适度工程化** | 只有真正降低分析复杂度时才引入抽象 |
+| 🔍 **科学决策可追踪** | 筛选、转换和统计判断保持可见 |
+
 ## ✨ 什么叫“有人味儿”？
 
-不是故意写低质量代码，而是：
+不是故意写简单或低质量代码。
 
-> **不把一个科研 panel 强行软件工程化。**
+而是在没有实际科研价值时，不把一个科研 panel 强行软件工程化。
 
 ### 更倾向于
 
@@ -67,7 +63,7 @@ stats <- run_permanova(pcoa_data)
 plot_pcoa(pcoa_data)
 ```
 
-而不是没有实际科研价值地写成：
+而不是：
 
 ```r
 cfg <- PipelineConfig$new(...)
@@ -77,53 +73,48 @@ executor <- ctx$get_executor()
 executor$run()
 ```
 
+如果后者并没有带来真正的科学或维护价值。
+
 ## 🧠 科研代码本身应该能够讲故事
 
 ```mermaid
-flowchart TD
-    A["📥 原始 / 上游数据"] --> B["🧹 数据整理"]
+flowchart LR
+    A["📥 源数据"] --> B["🧹 数据整理"]
     B --> C["📊 统计分析"]
     C --> D["🎨 绘图"]
-    D --> E["📤 结果输出"]
+    D --> E["📤 正式结果"]
 ```
 
 读代码的人应该很容易回答：
 
-- 这个对象从哪里来的？
+- 这个对象从哪里来？
 - 哪些样本被纳入？
 - 哪一步做了筛选？
-- 用了什么统计方法？
-- 这个图由哪个数据生成？
+- 使用了什么统计方法？
+- 哪一步生成了图或表？
 
 ## 🚫 重点避免
 
-### 1. 科研脚本过度工程化
+### 科研脚本过度工程化
 
 ```text
 一个 panel
-↓
-框架
-↓
-工厂
-↓
-registry
-↓
-配置系统
-↓
-六层函数
+→ framework
+→ factory
+→ registry
+→ 配置层
+→ 多层抽象
 ```
 
-很多时候，一个结构清晰的 R 脚本反而更适合科研分析。
+如果一个清晰的 R 脚本已经足够，就没有必要增加工程复杂度。
 
-### 2. 隐藏科学判断
+### 隐藏科学判断
 
-不推荐：
+避免没有解释的：
 
 ```r
 df <- df[df$value < 10, ]
 ```
-
-却不解释为什么是 10。
 
 更推荐：
 
@@ -132,73 +123,57 @@ df <- df[df$value < 10, ]
 df <- df[df$value < detection_limit, ]
 ```
 
-### 3. AI 擅自“优化”科学方法
+### AI 擅自“优化”科学方法
 
-AI 不应为了让代码更漂亮而擅自改变：
+AI 不应静默改变：
 
 - 样本集合；
 - 统计方法；
 - 数据转换；
 - 筛选阈值；
 - 正式报告数值；
-- 图形表达的科学语义。
+- 图件的科学语义。
 
-## 🔬 推荐的科研脚本结构
+## 🧪 推荐的脚本形态
+
+简单 panel：
 
 ```text
 01_plot_pcoa.R
 
-read_data
+read_data()
     ↓
-data_prepare
+prepare_data()
     ↓
-statistics
+run_statistics()
     ↓
-plot
+plot()
     ↓
-save
+save_results()
 ```
 
-复杂分析当然可以合理拆分，例如网络分析：
+真正复杂、计算成本高的流程，可以合理拆分：
 
 ```text
 prepare_network.R
-        ↓
+       ↓
+network object
+       ↓
 plot_network.R
 ```
 
-但不应该默认建立一个 `01_prepare_all_data.R`，把所有中间结果长期保存下来。
+## 🎯 适用场景
 
-## 🧩 适用领域
-
-尤其适合：
-
-- 生态学
-- 微生物生态学 / 微生物组
-- 土壤科学
-- 环境科学
-- 转录组
-- 代谢组
-- 多组学
-- 科研绘图
-- 论文数据分析
+| 研究方向 | 典型用途 |
+|---|---|
+| 🌱 生态学 / 土壤科学 | 群落、环境因子与处理效应分析 |
+| 🦠 微生物组 | 扩增子、网络、多样性分析 |
+| 🧬 转录组 / 代谢组 | 下游统计与可复现分析 |
+| 🔗 多组学 | 跨层级关联与整合分析 |
+| 📈 论文图件 | 可维护的 panel 级脚本 |
 
 ## 🌿 核心理念
 
-好的 R 代码不仅仅是：
+> **好的科研代码不仅要能运行，还应该能解释自己、保持科学语义，并且长期改得动。**
 
-```text
-能运行
-```
-
-还应该：
-
-```text
-看得懂
-追得回
-改得动
-跑得出
-经得起复查
-```
-
-> **代码是写给机器执行的，也是写给未来的自己看的。**
+> 代码是写给机器执行的，也是写给未来的自己看的。
