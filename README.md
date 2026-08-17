@@ -28,45 +28,78 @@ The goal is not to make scientific scripts look like software frameworks. The go
 
 ## 📦 Installation
 
-### Recommended: manage Skills with CC Switch
+This repository is a standalone AI Agent Skill. CC Switch is optional.
 
-For a multi-agent environment, use **CC Switch as the unified Skill manager** instead of maintaining separate physical copies for Claude Code, Codex, or other agents.
+### Claude Code
 
-Import this Skill into CC Switch:
+**macOS / Linux**
+
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/apexpeng/write-human-r-code.git \
+  ~/.claude/skills/write-human-r-code
+```
 
 **Windows PowerShell**
 
 ```powershell
-Start-Process "ccswitch://v1/import?resource=skill&name=write-human-r-code&repo=apexpeng/write-human-r-code&branch=main"
+$target = Join-Path $HOME ".claude/skills/write-human-r-code"
+New-Item -ItemType Directory -Force (Split-Path $target -Parent) | Out-Null
+git clone https://github.com/apexpeng/write-human-r-code.git $target
 ```
 
-**macOS**
+### OpenAI Codex
+
+**macOS / Linux**
 
 ```bash
-open "ccswitch://v1/import?resource=skill&name=write-human-r-code&repo=apexpeng/write-human-r-code&branch=main"
+mkdir -p ~/.codex/skills
+git clone https://github.com/apexpeng/write-human-r-code.git \
+  ~/.codex/skills/write-human-r-code
 ```
 
-Direct URI:
+**Windows PowerShell**
+
+```powershell
+$target = Join-Path $HOME ".codex/skills/write-human-r-code"
+New-Item -ItemType Directory -Force (Split-Path $target -Parent) | Out-Null
+git clone https://github.com/apexpeng/write-human-r-code.git $target
+```
+
+### DeepSeek Harness / shared Agent Skill directory
+
+**macOS / Linux**
+
+```bash
+mkdir -p ~/.agents/skills
+git clone https://github.com/apexpeng/write-human-r-code.git \
+  ~/.agents/skills/write-human-r-code
+```
+
+**Windows PowerShell**
+
+```powershell
+$target = Join-Path $HOME ".agents/skills/write-human-r-code"
+New-Item -ItemType Directory -Force (Split-Path $target -Parent) | Out-Null
+git clone https://github.com/apexpeng/write-human-r-code.git $target
+```
+
+> If your Agent uses a custom Skill directory, install the repository into that configured location instead.
+
+### If `skill-install-workflow` is already installed
+
+You can simply ask your Agent:
 
 ```text
-ccswitch://v1/import?resource=skill&name=write-human-r-code&repo=apexpeng/write-human-r-code&branch=main
+Install this Skill:
+https://github.com/apexpeng/write-human-r-code.git
 ```
 
-After import, open **CC Switch → Skills** and install/sync the Skill to the agents you want to use. **CC Switch built-in storage + SymbolicLink sync** is recommended for a shared local Skill library.
+The governance Skill can check provenance, duplication, version conflicts and post-install integrity before installing it.
 
-### Recommended installation order for this Skill suite
+### Optional: CC Switch
 
-```text
-1. skill-install-workflow
-        ↓
-2. r-data-lineage-plotting
-        ↓
-3. write-human-r-code        ← this Skill
-```
-
-1. Install **`skill-install-workflow` first** so later Skill installations are checked for provenance, duplication, version conflicts and integrity.
-2. Install **`r-data-lineage-plotting` second** to establish authoritative data sources, directory roles and rerun dependencies.
-3. Install **`write-human-r-code` third** to add human-readable R coding and refactoring guidance on top of that lineage foundation. This Skill explicitly pairs with `r-data-lineage-plotting` whenever work touches data files or analysis objects.
+If you already use CC Switch for centralized multi-Agent Skill management, you can import this repository there instead of keeping separate physical copies. See the [`skill-install-workflow`](https://github.com/apexpeng/skill-install-workflow) README for the recommended CC Switch architecture, SymbolicLink model and suite installation order.
 
 ## 🤖 From generated code to research code
 
