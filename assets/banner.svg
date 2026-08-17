@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="500" viewBox="0 0 1600 500" role="img" aria-labelledby="title desc">
+  <title id="title">write-human-r-code</title>
+  <desc id="desc">R code that looks written, not generated.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#102A43"/>
+      <stop offset="55%" stop-color="#1F6FB2"/>
+      <stop offset="100%" stop-color="#4DA3E6"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#071A2B" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="500" rx="36" fill="url(#bg)"/>
+  <circle cx="1370" cy="80" r="235" fill="#FFFFFF" opacity="0.055"/>
+  <circle cx="1430" cy="420" r="300" fill="#FFFFFF" opacity="0.04"/>
+  <g transform="translate(1080 92)" filter="url(#shadow)">
+    <rect x="0" y="0" width="340" height="300" rx="26" fill="#0B2239" opacity="0.9"/>
+    <circle cx="34" cy="30" r="7" fill="#FF6B6B"/><circle cx="58" cy="30" r="7" fill="#FFD166"/><circle cx="82" cy="30" r="7" fill="#7BD88F"/>
+    <g font-family="Consolas, Menlo, monospace" font-size="21" fill="#D9ECFF">
+      <text x="32" y="86">metadata &lt;- read.csv(...)</text>
+      <text x="32" y="128" fill="#8DD3FF">pcoa &lt;- prepare_data(...)</text>
+      <text x="32" y="170" fill="#A6E3A1">stats &lt;- run_test(pcoa)</text>
+      <text x="32" y="212" fill="#FFD6A5">plot_pcoa(pcoa)</text>
+      <text x="32" y="254" fill="#C8B6FF">save_results(stats)</text>
+    </g>
+  </g>
+  <g font-family="Inter, Segoe UI, Arial, sans-serif" fill="#FFFFFF">
+    <text x="120" y="195" font-size="72" font-weight="750">write-human-r-code</text>
+    <text x="122" y="260" font-size="31" font-weight="500" opacity="0.92">R code that looks written, not generated.</text>
+    <text x="122" y="330" font-size="24" opacity="0.78">Readable · reproducible · scientifically faithful</text>
+  </g>
+  <g transform="translate(120 380)" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="20" font-weight="600">
+    <rect width="118" height="48" rx="24" fill="#FFFFFF" opacity="0.15"/><text x="59" y="31" text-anchor="middle" fill="#FFFFFF">R Code</text>
+    <rect x="134" width="156" height="48" rx="24" fill="#FFFFFF" opacity="0.15"/><text x="212" y="31" text-anchor="middle" fill="#FFFFFF">Human-first</text>
+    <rect x="306" width="158" height="48" rx="24" fill="#FFFFFF" opacity="0.15"/><text x="385" y="31" text-anchor="middle" fill="#FFFFFF">Research</text>
+  </g>
+</svg>
