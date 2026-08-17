@@ -26,6 +26,53 @@ AI can generate R code quickly. The harder question is whether another researche
 
 The goal is not to make scientific scripts look like software frameworks. The goal is to make them **clear enough to audit and simple enough to maintain**.
 
+## 🤖 From generated code to research code
+
+```mermaid
+flowchart LR
+    A["🤖 AI generated"] --> B["📄 Readable structure"]
+    B --> C["🧬 Explicit data flow"]
+    C --> D["📊 Transparent statistics"]
+    D --> E["✅ Reproducible output"]
+    E --> F["🧑‍🔬 Human maintainable"]
+```
+
+## ✅ Core principles
+
+| Principle | What it means |
+|---|---|
+| 👤 **Human-readable first** | Clear names, comments and script structure |
+| 🔬 **Scientific reproducibility** | Explicit workflow from input to formal output |
+| 🧠 **Preserve scientific meaning** | Never silently change methods, samples or formal values |
+| 🧩 **Right-sized engineering** | Use abstraction only when it reduces real analytical complexity |
+| 🔍 **Traceable decisions** | Filtering, transformations and statistics remain visible |
+
+## ✨ What “human” means here
+
+It does **not** mean deliberately writing simplistic or low-quality code.
+
+It means preferring this:
+
+```r
+metadata <- read.csv("data/metadata.csv")
+
+pcoa_data <- prepare_pcoa_data(metadata, otu_table)
+stats <- run_permanova(pcoa_data)
+plot_pcoa(pcoa_data)
+```
+
+over this:
+
+```r
+cfg <- PipelineConfig$new(...)
+factory <- AnalysisFactory$new(cfg)
+ctx <- factory$build_context()
+executor <- ctx$get_executor()
+executor$run()
+```
+
+when the abstraction adds no scientific value.
+
 ## 📦 Installation
 
 This repository is a standalone AI Agent Skill. CC Switch is optional.
@@ -100,53 +147,6 @@ The governance Skill can check provenance, duplication, version conflicts and po
 ### Optional: CC Switch
 
 If you already use CC Switch for centralized multi-Agent Skill management, you can import this repository there instead of keeping separate physical copies. See the [`skill-install-workflow`](https://github.com/apexpeng/skill-install-workflow) README for the recommended CC Switch architecture, SymbolicLink model and suite installation order.
-
-## 🤖 From generated code to research code
-
-```mermaid
-flowchart LR
-    A["🤖 AI generated"] --> B["📄 Readable structure"]
-    B --> C["🧬 Explicit data flow"]
-    C --> D["📊 Transparent statistics"]
-    D --> E["✅ Reproducible output"]
-    E --> F["🧑‍🔬 Human maintainable"]
-```
-
-## ✅ Core principles
-
-| Principle | What it means |
-|---|---|
-| 👤 **Human-readable first** | Clear names, comments and script structure |
-| 🔬 **Scientific reproducibility** | Explicit workflow from input to formal output |
-| 🧠 **Preserve scientific meaning** | Never silently change methods, samples or formal values |
-| 🧩 **Right-sized engineering** | Use abstraction only when it reduces real analytical complexity |
-| 🔍 **Traceable decisions** | Filtering, transformations and statistics remain visible |
-
-## ✨ What “human” means here
-
-It does **not** mean deliberately writing simplistic or low-quality code.
-
-It means preferring this:
-
-```r
-metadata <- read.csv("data/metadata.csv")
-
-pcoa_data <- prepare_pcoa_data(metadata, otu_table)
-stats <- run_permanova(pcoa_data)
-plot_pcoa(pcoa_data)
-```
-
-over this:
-
-```r
-cfg <- PipelineConfig$new(...)
-factory <- AnalysisFactory$new(cfg)
-ctx <- factory$build_context()
-executor <- ctx$get_executor()
-executor$run()
-```
-
-when the abstraction adds no scientific value.
 
 ## 🧠 Scientific code should tell a story
 
